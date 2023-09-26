@@ -1,8 +1,37 @@
-const express = require('express');
-const router = express.Router();
-const controller = require("../controllers/videos");
+const videos = require("../models/videos");
 
-router.get('/videos', controller.showVideo);
-router.get('/video/:id', controller.showVideoById);
+const database = require("../config/database");
 
-module.exports = router;
+
+// FUNÇÃO PARA VER AS VIDEOS
+exports.showVideo = (req, res) => {
+    const query = "SELECT * FROM VIDEOS";
+
+    database.query(query).then(
+        (resultado) => {
+            res.status(200).send({ mensagem: resultado.rows })
+        },
+        (erro) => {
+            res.status(500).send({ erro: erro })
+        }
+
+        
+    )
+}
+
+// FUNÇÃO PARA VER OS VIDEOS
+exports.showVideoById = (req, res) => {
+    const query = "SELECT * FROM VIDEOS WHERE id=$1;"
+    const values = [req.params.id];
+
+    database.query(query, values).then(
+        (resultado) => {
+            res.status(200).send({ mensagem: resultado.rows })
+        },
+        (erro) => {
+            res.status(500).send({ erro: erro })
+        }
+    )
+}
+
+
