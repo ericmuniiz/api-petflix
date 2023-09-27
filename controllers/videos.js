@@ -9,7 +9,7 @@ exports.showVideo = (req, res) => {
 
     database.query(query).then(
         (resultado) => {
-            res.status(200).send({ mensagem: resultado.rows })
+            res.status(200).send(resultado.rows)
         },
         (erro) => {
             res.status(500).send({ erro: erro })
@@ -26,7 +26,7 @@ exports.showVideoById = (req, res) => {
 
     database.query(query, values).then(
         (resultado) => {
-            res.status(200).send({ mensagem: resultado.rows })
+            res.status(200).send(resultado.rows[0])
         },
         (erro) => {
             res.status(500).send({ erro: erro })
