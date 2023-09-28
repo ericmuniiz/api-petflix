@@ -5,7 +5,7 @@ const database = require("../config/database");
 
 // FUNÇÃO PARA VER AS VIDEOS
 exports.showVideo = (req, res) => {
-    const query = "SELECT * FROM VIDEOS";
+    const query = "SELECT * FROM VIDEOS order by id";
 
     database.query(query).then(
         (resultado) => {
